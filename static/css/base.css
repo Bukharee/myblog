@@ -1,0 +1,54 @@
+
+
+h4 {
+    text-align: center;
+    border: 2px white;
+    color: white;
+    text-shadow: 2px 2px 7px teal;
+    margin: 5px;
+}
+
+hr {
+    width: 20%;
+    color:  teal;
+    height: 5px;
+}
+
+h5 {
+    font-family: Pacifico;
+    font-size: 40px;
+    text-transform: capitalize;
+}
+.carousel-caption > p {
+    font-size: 25px;
+}
+.madanni {
+    background-color:white;
+    color: teal;
+    margin: 0 5px 0 5px;       
+    border-radius: 0.8em;
+    border: 1px teal solid;
+    font-weight: 300;
+}
+.madanni:active {
+    color: white;
+    background: teal;
+    font-weight: 300;
+    border: 2px teal solid;
+    border-radius: .8em;
+}
+
+.madanni:hover {    
+    color: white;
+    background: teal;
+    font-weight: 300;
+    border: 2px teal solid;
+    border-radius: .8em;
+}
+.madanni > a:hover {
+    color: white;
+}
+
+@media screen and (max-width: 575px) {
+
+}

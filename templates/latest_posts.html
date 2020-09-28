@@ -1,0 +1,20 @@
+{% load static %}
+    {% for post in latest_posts %}
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <img
+        src="{% if post.post_picture %}{{ post.post_picture.url }}{% else %}{% static 'images/python-logo.jpg' %}{% endif %}"
+        alt="" class="card-img-top" width="100%" height="255">
+          <div class="card-body">
+            <p class="card-text"><a href="{{ post.get_absolute_url }}"> {{post.title.upper}}</a></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <i class="fa fa-eye" style="color:gray"> {{ post.view_count }}</i><div style="width: 10px;"></div>
+                <i class="fa fa-comment" style="color:gray"> {{ post.comment_count }}</i>
+              </div>
+              <small class="text-muted">{{ post.publish|timesince }} ago</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}

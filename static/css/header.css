@@ -1,0 +1,57 @@
+a {
+    text-decoration: none;
+    color: teal;
+
+}
+
+nav {
+    background-color:white;
+    box-shadow: 2px 2px 2px rgb(0, 128, 128, 0.2);
+    border-radius: 6px;
+    margin-bottom: 5px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+.navbar-nav > .nav-item > .nav-link {
+    color: teal;
+    float: left;
+}
+.navbar-nav > .nav-item {
+    float: left;
+}
+.navbar-brand {
+    font-weight: 400;
+    font-family: Pacifico;
+}
+.madanni {
+    background-color:white;
+    color: teal;
+    margin: 0 5px 0 5px;       
+    border-radius: 0.8em;
+    border: 2px teal solid;
+    font-weight: 300;
+}
+.madanni:active {
+    color: white;
+    background: teal;
+    font-weight: 300;
+    border: 2px teal solid;
+    border-radius: .8em;
+}
+
+.madanni:hover {    
+    color: white;
+    background: teal;
+    font-weight: 300;
+    border: 2px teal solid;
+    border-radius: .8em;
+}
+.madanni > a:hover {
+    color: white;
+}
+.card-body > p > a {
+    color: teal;
+     text-decoration: none;
+     display: block;
+}

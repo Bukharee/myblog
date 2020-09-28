@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/detail1.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            font-size: 1rem;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <footer>
+    
+        <div class="row" style="margin:0;">
+            
+            <ul class="list-group col-sm-4" style="border: none;">
+                <li class="list-group-item" id="none">Contact Me</li>
+                <li class="list-group-item" id="none"><i class="fab fa-facebook"></i> Facebook</li>
+                <li class="list-group-item" id="none"><i class="fab fa-instagram"></i> Instagram</li>
+                <li class="list-group-item" id="none"><i class="fab fa-twitter"></i> Twitter</li>
+                <li class="list-group-item" id="none"><i class="fab fa-linkedin"></i> LinkedIn</li>
+                <li class="list-group-item" id="none"><i class="fas fa-phone-alt"></i> <a href="tel:+2349063173036">Give Me A Call</a></li>
+                <li class="list-group-item" id="none"><i class="fas fa-envelope"></i> <a href="mailto:idrisbukhariauwal@gmail.com">Via Email</a></li>
+            </ul>
+            
+            <ul class="list-group col-sm-4">
+                <li class="list-group-item" id="none">Follow Me</li>
+                <li class="list-group-item" id="none"><i class="fab fa-github"></i> Github</li>
+                <li class="list-group-item" id="none"><i class="fab fa-codepen"></i> CodePen</li>
+                <li class="list-group-item" id="none"><i class="fab fa-stack-overflow"></i> Stackoverflow</li>
+                <li class="list-group-item" id="none"><i class="fab fa-quora"></i>  Quora</li>
+            </ul>
+            
+            <ul class="list-group col-sm-4">
+                <li class="list-group-item" id="none">Subscribe To My Newsletter</li>
+                <li class="list-group-item" id="none">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="email" name="email_id" id="email_id">
+                        <input type="submit" value="Subscribe" id="email_submit">
+                    </form>
+                    </li>
+                <br>
+                <br>
+                <br>
+                <li class="list-group-item" style="background-color:gray;"><img src="{%  static 'images/developed.png' %}" alt="" class="img-responsive" width="170" height="100"></li>
+            </ul>
+            
+        </div>
+    <p class="text-center">Privacy Policy | <i class="far fa-copyright"></i> copyright Bukhari Auwal Idris 2020</p>
+    </footer>
+</body>
+</html>

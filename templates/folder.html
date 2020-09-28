@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Document</title>
+    <style>
+        .my-list {
+            color: white; 
+            background: teal; 
+            padding:10px;
+            border-radius: 8em;
+            margin: 6px;
+        }
+    </style>
+</head>
+<body>
+    {% include "header.html" %}
+<div class="container" style="margin-bottom: 20px; padding-bottom: 20x;">
+    <ul class="list-inline">
+        <li class="list-inline-item text-left my-list"><a  style="color: white; display: block;" href="{{ folder.get_deleted }}"><i class="fa fa-trash icon" aria-hidden="true" ></i>  DELETE THIS FOLDER</a></li>
+        <li class="list-inline-item text-right my-list"><a style="color: white; display: block;" href="{{ folder.get_renamed }}">RENAME THIS FOLDER</a></li>
+        <li class="list-inline-item text-left my-list"><a  style="color: white; display: block;" href="{{ folder.get_deleted }}"><i class="fa fa-plus icon" aria-hidden="true" ></i> ADD NEW PHOTO</a></li>
+    </ul>
+</div>
+<div style="height: 20px;"></div>
+<div class="container">
+    <div class="row">
+        {% for photo in images %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <img
+            src="{{ photo.photo.url }}"
+            alt="" class="card-img-top" width="100%" height="255">
+              <div class="card-body">
+                <p class="card-text">{{photo.name.upper}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <p> {{ photo.photo.url }}</p><div style="width: 10px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

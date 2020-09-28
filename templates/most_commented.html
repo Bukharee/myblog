@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load blog_tags %}
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    {% for post in most_commented %}
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <img
+        src="{% if post.post_picture %}{{ post.post_picture.url }}{% else %}{% static 'images/python-logo.jpg' %}{% endif %}"
+        alt="" class="card-img-top" width="100%" height="255">
+          <div class="card-body">
+            <p class="card-text"><a href="{{ post.get_absolute_url }}">{{post.title.upper}}</a></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">View</button><div style="width: 10px;"></div>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+              </div>
+              <small class="text-muted">{{ post.publish|timesince }} ago</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+</body>
+</html>
