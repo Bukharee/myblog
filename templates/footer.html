@@ -41,7 +41,7 @@
                 <li class="list-group-item" id="none">
                     <form method="POST">
                         {% csrf_token %}
-                        <input type="email" name="email_id" id="email_id">
+                        {{ subscribingform.as_p }}
                         <input type="submit" value="Subscribe" id="email_submit">
                     </form>
                     </li>

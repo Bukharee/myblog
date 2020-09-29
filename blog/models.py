@@ -117,3 +117,6 @@ class Folder(models.Model):
     def save_in_folder(self):
         return reverse('blog:photo_upload', args=[self.id])
 
+class Subscribe(models.Model):
+    email = models.EmailField()
+    timestamp = models.DateTimeField(auto_now_add=True)

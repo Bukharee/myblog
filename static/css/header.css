@@ -27,7 +27,7 @@ nav {
 .madanni {
     background-color:white;
     color: teal;
-    margin: 0 5px 0 5px;       
+    margin: 10px 5px 10px 5px;       
     border-radius: 0.8em;
     border: 2px teal solid;
     font-weight: 300;
@@ -47,7 +47,7 @@ nav {
     border: 2px teal solid;
     border-radius: .8em;
 }
-.madanni > a:hover {
+.madanni  a:hover {
     color: white;
 }
 .card-body > p > a {
@@ -55,6 +55,8 @@ nav {
      text-decoration: none;
      display: block;
 }
-@media screen and (max-width: 575px) {
-
+@media screen and (max-width: 991px) {
+    .nav {
+        background-color: red;
+    }
 }

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment, Reply, Post
+from .models import Comment, Reply, Post, Subscribe
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.contrib import admin
@@ -35,3 +35,8 @@ class PostForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     query = forms.CharField(widget=forms.TextInput(attrs={}), label="")
+
+class SubscribingForm(forms.ModelForm):
+    class Meta:
+        model = Subscribe
+        fields = ['email',]

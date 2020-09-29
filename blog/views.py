@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView, View
-from .models import Post, Comment, Reply, Category
+from .models import Post, Comment, Reply, Category, Subscribe
 from .forms import CommentForm, ReplyForm, PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import get_user_model
@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from taggit.models import Tag
 from django.contrib.postgres.search import SearchVector, SearchRank, SearchQuery
-from .forms import SearchForm
+from .forms import SearchForm, SubscribingForm
 from .models import PostView
 # from django.contrib import messages TODO: display a message when the user succesfully upload a new post
 # Create your views here.
@@ -33,6 +33,7 @@ def PostList(request):
     form = SearchForm
     results = []
     query = None
+    subscribingform = SubscribingForm()
     if 'query' in request.GET:
         form = SearchForm(request.GET)
         if form.is_valid():
@@ -43,8 +44,17 @@ def PostList(request):
                 search=search_vector,
                 rank = SearchRank(search_vector, search_query)
             ).filter(rank__gte=0.3).order_by('-rank')
+    if request.method == 'POST':
+        subscribingform = SubscribingForm(request.POST)
+        if subscribingform.is_valid():
+            check_it = Subscribe.objects.filter(email=subscribingform.instance.email)
+            if check_it.exists():
+                subscribingform = SubscribingForm()
+            else:
+                subscribingform.save()
+                subscribingform = SubscribingForm()
     return render(request, 'post_list.html', {'post':post, 'search_form':form, 'query':query, 
-    'results': results,})
+    'results': results, 'subscribingform': subscribingform})
 
 
 def post_detail(request, slug,  my_num):
@@ -52,7 +62,7 @@ def post_detail(request, slug,  my_num):
     post = get_object_or_404(Post, id=my_num)
     form = CommentForm()
     if request.user.is_authenticated:
-        PostView.objects.create(user=user, post=post)
+        PostView.objects.get_or_create(user=user, post=post)
     if 'comment' in request.GET:
         form = CommentForm(request.GET)
         if form.is_valid():

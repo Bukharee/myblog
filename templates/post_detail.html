@@ -56,8 +56,8 @@
     {% include 'header.html' %}
     <form class="container">
     <h4 class="text-center" style="font-family:'Roboto' sans-serif; color: teal; text-shadow: none;">{{object.title.upper}}</h4>
-    <h6 style="color: black; font-family: Indie Flower; font-size: 1em;" class="text-center"><img src="{{ object.author.photo.url }}" class="img-fluid" alt="" width="50" height="40" style="border-radius:50px;">
-    Published By <strong>{{ object.author }}</strong> On <strong></strong>  <i class="fas fa-tags"></i> {{ object.tags.all|join:", " }}</h6>
+    <h6 style="color: black; font-family: Indie Flower; font-size: 1em;" class="text-center"><a href="/accounts/get_profile/{{ object.author.id }}"><img src="{{ object.author.photo.url }}" class="img-fluid" alt="" width="50" height="50" style="border-radius:50px;"></a>
+    Published By <strong>{{ object.author }}</strong> On {{ object.publish }}<strong></strong>  <i class="fas fa-tags"></i> {{ object.tags.all|join:", " }}</h6>
     <p>
         {% if request.user == object.author %}
         <ul class="list-inline text-center">
@@ -81,18 +81,22 @@
 </div>
     {% endif %}
     <div style="background-color: teal; width: 100%; padding: 8px; margin-top: 0;">
+        {% if object.comme %}
+          <p class="text-center"> COMMENTS </p>
+        {% endif %}
     {% for comments in object.comment_set.all %}
     <ul>
-        <li style="color: white; list-style-type: none;"><img src="{{comments.name.photo.url}}" width="40", height="40" style="border-radius: 7em;">  {{ comments }}{% if request.user == comments.name.user %}<a href="{% url 'comment_delete.html' %}">delete comment</a>{% else %}blahblahblah{% endif %}</li>
+        <li style="color: white; list-style-type: none;"><img src="{{comments.name.photo.url}}" width="40", height="40" style="border-radius: 7em;">  {{ comments }}</li>
     </ul>
     {% endfor %}
     {% if request.user.is_authenticated %}
+
     <form action="">
         {{ form|crispy }}
         <input type="submit" value="COMMENT">
     </form>
     {% else %}
-    <p class="text-center border"><a href="{% url 'login' %}" style="color: white; display: block;"> Login Here To Comment </a></p>
+    <p class="text-center border"><a href="{% url 'login' %}" style="color: white; display: block;">  Login Here To Comment </a></p>
     {% endif %}
 </div>
 

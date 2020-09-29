@@ -87,8 +87,7 @@ class Rename(UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         obj = self.get_object()
-        print(obj.name == self.request.user)
-        return obj.name == self.request.user
+        return obj.user == self.request.user
 
 class PhotoUploadView(CreateView):
     form_class = PhotoUploadForm
@@ -96,6 +95,10 @@ class PhotoUploadView(CreateView):
     success_url = '/dashbaord/'
 
     def form_valid(self, form):
-        form.instance.user = request.user
-        form.instance.folder = request.folder
+        form.instance.user = self.request.user
+        form.instance.folder = self.request.pk
         return super(PhotoUploadView, self).form_valid(form)
+
+def get_his_profile(request, his_id):
+    user = get_object_or_404(get_user_model(), id=his_id)
+    return render(request, 'normal_user_profile.html', {'user': user})
