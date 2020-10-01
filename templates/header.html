@@ -31,23 +31,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item madanni">
-          <a class="nav-link" href="{% url 'account:dash' %}">DASHBOARD</a>
+          <a class="nav-link" style="display: block;" href="{% url 'account:dash' %}">DASHBOARD</a>
+        </li>
+        <li class="nav-item madanni ">
+          <a class="nav-link text-center"  style="display: block;" href="/category/1/">TECHNOLOGY</a>
         </li>
         <li class="nav-item madanni">
-          <a class="nav-link" href="/category/1/">TECHNOLOGY</a>
-        </li>
-        <li class="nav-item madanni">
-          <a class="nav-link" href="/category/2/" id="navbarDropdown">
+          <a class="nav-link" style="display: block;" href="/category/2/" id="navbarDropdown">
             SCHOOL
           </a>
         </li>
         <li class="nav-item madanni">
-          <a class="nav-link" href="/category/3/" id="navbarDropdown">
+          <a class="nav-link" style="display: block;" href="/category/3/" id="navbarDropdown">
             PUBLICATIONS
           </a>
         </li>
       </ul>
-
       <form class="form-inline my-2 my-lg-0">
         {{search_form|crispy}} <div style="width: 10px;"></div>
         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" style="background-color: teal; color: white; border: none;">Search</button>

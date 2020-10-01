@@ -11,7 +11,8 @@ from blog.forms import SearchForm
 from django.contrib.postgres.search import SearchVector, SearchRank, SearchQuery
 from django.views.generic import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from blog.models import Folder
+from blog.models import Folder, PostPicture
+from django.urls import reverse
 # Create your views here.
 
 class SignUpView(generic.CreateView):
@@ -61,7 +62,7 @@ def folder(request, folder_field=None):
     images = PostPicture.objects.filter(folder=folder_field, user=user)
     return render(request, 'folder.html', {'folder': folder, 'images': images})
 
-class FolderCreateView(CreateView, LoginRequiredMixin):
+class FolderCreateView(UserPassesTestMixin, CreateView):
     form_class = CreateFolderForm
     template_name = 'create_folder.html'
     success_url = '/blog/'
@@ -70,15 +71,18 @@ class FolderCreateView(CreateView, LoginRequiredMixin):
         form.instance.user = self.request.user
         return super(FolderCreateView, self).form_valid(form)
 
-class FolderDeleteView(DeleteView, UserEditForm):
+    def test_func(self):
+        return self.request.user.is_staff
+
+class FolderDeleteView(UserPassesTestMixin, DeleteView):
     model = Folder
     fields = ['name',]
     template_name = 'folder_delete.html'
-    success_url = reverse_lazy('account:dashboard')
+    success_url = reverse_lazy('account:dash')
 
     def test_func(self):
         obj = self.get_object()
-        return obj.name == self.request.user
+        return obj.user == self.request.user
 
 class Rename(UserPassesTestMixin, UpdateView):
     model = Folder
@@ -89,16 +93,22 @@ class Rename(UserPassesTestMixin, UpdateView):
         obj = self.get_object()
         return obj.user == self.request.user
 
-class PhotoUploadView(CreateView):
-    form_class = PhotoUploadForm
-    template_name = 'upload_photo.html'
-    success_url = '/dashbaord/'
+def PhotoUploadView(request, folder_id):
+    form = PhotoUploadForm()
+    folder = get_object_or_404(Folder, id=folder_id)
+    if request.method == 'POST':
+        form = PhotoUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_form = form.save(commit=False)
+            new_form.folder = folder
+            new_form.user = request.user
+            new_form.save()
+            return redirect(reverse('blog:photo_upload', args=[folder_id]))
+    return render(request, 'upload_photo.html', {'form': form})
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.instance.folder = self.request.pk
-        return super(PhotoUploadView, self).form_valid(form)
+        
 
 def get_his_profile(request, his_id):
     user = get_object_or_404(get_user_model(), id=his_id)
-    return render(request, 'normal_user_profile.html', {'user': user})
+    post = Post.objects.filter(author=user)
+    return render(request, 'normal_user_profile.html', {'user': user, 'post': post})

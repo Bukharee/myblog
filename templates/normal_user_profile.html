@@ -6,9 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
-    <link rel="stylesheet" href="{% static 'css/all.css' %}">
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/add_post.css' %}">
     <style>
         button {
             border-style: solid;
@@ -49,49 +48,56 @@
 
 <body>
     {% include "header.html" %}
-    <div class="container-fluid top-background"
-        style="width: 100%;  height: 280px; margin: 0; padding: 0; background-color: teal; ">
-        <img src={{ user.photo.url }} class="float-left" alt="..."
-            style="border-radius: 7em; height: 13vw; border: 3px solid white; width: 13vw; margin: 50px 30px 8px 40px;">
-            <br><br>
-            <h4 class="text-center">{{ user.first_name }} {{ user.last_name }}({{ user.username }})</h4>
-        <p class="text-center">{{ user.bio }}</p>
-
-    </div>
-  <div class="container-fluid" style="margin: 0; padding: 0;">
-      <div class="row" style="margin: 0;">
-        <div class="col-sm-4" style="margin: 0; padding: 0;">
-             <ul class="list-group" style="margin: 0; padding: 0;">
-    <li class="list-group-item text-center"><div class="btn-group">
-        <strong>SETTINGS <i class="fa fa-cog"></i></strong>
-        </div></li>
-    <li class="list-group-item "><a href="{% url 'account:edit' %}">EDIT MY DETAILS  <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
-    <li class="list-group-item"><a href="{% url 'password_change' %}">CHANGE PASSWORD  <i class="fa fa-lock icon"></i></a></li>
-    <li class="list-group-item"><a href="{% url 'password_reset' %}">RESET PASSWORD    <i class="fa fa-unlock-alt icon" aria-hidden="true"></i></a></li>
-    <li class="list-group-item"><a href="{% url 'blog:new_post' %}">ADD NEW ARTICLE    <i class="fa fa-plus icon" aria-hidden="true"></i></a></li>
-  </ul>
+    <div class="row" style="margin: 0;">
+        <div class="col-1"></div>
+        <div class="col-10">
+    <div class="container" style="vertical-align: middle; margin-top: 10vh;">
+        <p class="text-center"><img src="{{ user.photo.url }}"  alt="..."style="border-radius: 7em; height: 13vw; border-left: 3px solid teal; border-top: 3px solid orange; border-right: 3px solid teal; border-bottom: 3px solid orange; width: 13vw;"></p>
+        <p class="text-center" style="font-weight: 600;">{{ user.first_name }} {{ user.last_name }}({{ user.username }})</p>
+        <p class="text-center" style="background-color: orange; color: teal;">{{ user.bio }}</p>
+        <div class="row" style="margin: 0;">
+            <div class="col-3"><a href="//{{ user.facebook }}"><i class="fab fa-facebook" style="color: blue; font-size: 30px;"></i></a></div>
+            <div class="col-3"><a href="//{{ user.twitter }}"><i class="fab fa-twitter" style="color: #1DA1F2; font-size: 30px;"></i></a></div>
+            <div class="col-3"><a href="//{{ user.github }}"><i class="fab fa-instagram" style="color: hotpink; font-size: 30px;"></i></a></div>
+            <div class="col-3"><a href="mailto:{{user.email}}"><i class="fa fa-envelope" aria-hidden="true" style="color: red; font-size: 30px;"></i></a></div>
         </div>
-        <div class="col-sm-4" style="margin: 0; padding: 0;">
-            <ul class="list-group" style="margin: 0; padding: 0;">
-   <li class="list-group-item text-center"><div class="btn-group">
-       <strong>SETTINGS <i class="fab fa-github"></i></strong>
-       </div></li>
-   <li class="list-group-item "><a href="{% url 'account:create_folder' %}">CREATE NEW FOLDER <i class="fa fa-plus-circle icon" aria-hidden="true"></i></a></li>
-   <li class="list-group-item"><a href="#">DELETE FOLDER <i class="fa fa-trash icon" aria-hidden="true" ></i></a></li>
-   <li class="list-group-item"><a href="{% url 'logout' %}">LOGOUT <i class="fa fa-ban icon" aria-hidden="true"></i></a></li>
-   <li class="list-group-item"><a href="#" style="color: red">DELETE MY ACCOUNT <i class="fa fa-trash " aria-hidden="true" ></i></a></li>
- </ul>
+        <hr style="color: teal; height: 2px; background-color: teal; width: 100%;">
+        {% if user.is_staff  %}
+{% if post %}
+<p class="text-center" style="color: orange; font-weight: bolder;">MY POSTS</p>
+<hr style="color: teal; height: 2px; background-color: orange; width: 100%;">
+<div class="row">
+{% for post in post %}
+<div class="col-md-4">
+ <div class="card mb-4 shadow-sm">
+   <img
+ src="{% if post.post_picture %}{{ post.post_picture.url }}{% else %}{% static 'images/python-logo.jpg' %}{% endif %}"
+ alt="" class="card-img-top" width="100%" height="255">
+   <div class="card-body">
+     <p class="card-text"><a href="{{ post.get_absolute_url }}">{{post.title.upper}}</a></p>
+     <div class="d-flex justify-content-between align-items-center">
+       <div class="btn-group">
+         <i class="fa fa-comment" style="color:gray"> {{ post.comment_count }}</i><div style="width: 10px;"></div>
+         <i class="fa fa-eye" style="color:gray"> {{ post.view_count }}</i><div style="width: 10px;"></div>
        </div>
-       <div class="col-sm-4" style="margin: 0; padding: 0;">
-        <ul class="list-group" style="margin: 0; padding: 0;">
-<li class="list-group-item text-center"><div class="btn-group">
-   <strong>SOCIALS <i class="fab fa-user"></i></strong>
-   </div></li>
-<li class="list-group-item "><a href="{{ user.facebook }}">FACEBOOK  <i class="fab fa-facebook" style="color: blue;"></i></a></li>
-<li class="list-group-item"><a href="{{ user.twitter }}">TWITTER     <i class="fab fa-twitter" style="color: rgb(109, 89, 223);"></i></a></li>
-<li class="list-group-item"><a href="{{ user.github }}">INSTAGRAM   <i class="fab fa-instagram" style="color: hotpink"></i></a></li>
-<li class="list-group-item"><a href="mailto:{{user.email}}">EMAIL  <i class="fa fa-envelope" aria-hidden="true" style="color: red"></i></a> </li>
-</ul>
+       <small class="text-muted">{{ post.publish|timesince }} ago</small>
+     </div>
    </div>
+ </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endif %}
+</div>
     </div>
-  </div>
+</div>
+
+{% include "pagination.html" with page=posts %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

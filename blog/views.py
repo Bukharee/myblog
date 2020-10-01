@@ -10,6 +10,7 @@ from taggit.models import Tag
 from django.contrib.postgres.search import SearchVector, SearchRank, SearchQuery
 from .forms import SearchForm, SubscribingForm
 from .models import PostView
+from django.contrib import messages
 # from django.contrib import messages TODO: display a message when the user succesfully upload a new post
 # Create your views here.
 
@@ -49,9 +50,11 @@ def PostList(request):
         if subscribingform.is_valid():
             check_it = Subscribe.objects.filter(email=subscribingform.instance.email)
             if check_it.exists():
+                messages.info(request, 'You are Already Subscribed')
                 subscribingform = SubscribingForm()
             else:
                 subscribingform.save()
+                messages.success(request, 'you are subscribed succssifully!')
                 subscribingform = SubscribingForm()
     return render(request, 'post_list.html', {'post':post, 'search_form':form, 'query':query, 
     'results': results, 'subscribingform': subscribingform})
@@ -66,11 +69,25 @@ def post_detail(request, slug,  my_num):
     if 'comment' in request.GET:
         form = CommentForm(request.GET)
         if form.is_valid():
-            comment = form.cleaned_data['comment']
-            post.comment_set.create(comment=comment, post=post, name=user)
-            form = CommentForm()
+            check_it = Comment.objects.filter(comment=form.instance.comment, name=user)
+            if check_it.exists():
+                form = CommentForm()
+            else:
+                comment = form.cleaned_data['comment']
+                post.comment_set.create(comment=comment, post=post, name=user)
+                form = CommentForm()
     return render(request, 'post_detail.html', {'object': post, 'user': user, 'form': form})
-
+# def view(request):
+#     ...
+#     cookie_state = request.COOKIES.get('viewed_post_%s' % post_name_slug)
+#     response = render_to_response('community/post.html',context_instance=RequestContext(request, context_dict))
+#     if cookie_state:
+#         Post.objects.filter(id=post.id).update(total_views=F('total_views') + 1)
+#     else:
+#         Post.objects.filter(id=post.id).update(unique_views=F('unique_views') + 1)
+#         Post.objects.filter(id=post.id).update(total_views=F('total_views') + 1)
+#                         response.set_cookie('viewed_post_%s' % post_name_slug , True, max_age=2678400)
+#     return response
 
 
 class TagListView(ListView):
