@@ -1,9 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils import timezone
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from taggit.managers import TaggableManager
-from tinymce import HTMLField
 # Create your models here.
 from django.contrib.postgres.search import SearchVector
 class Category(models.Model):
@@ -36,7 +35,6 @@ class Post(models.Model):
     post_picture = models.ImageField(upload_to='post/%Y/%m/%d', null=True,)
     title = models.CharField(max_length=225)
     body = models.TextField()
-    content = HTMLField()
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     publish = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField()

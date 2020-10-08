@@ -11,6 +11,7 @@ from django.contrib.postgres.search import SearchVector, SearchRank, SearchQuery
 from .forms import SearchForm, SubscribingForm
 from .models import PostView
 from django.contrib import messages
+import os
 # from django.contrib import messages TODO: display a message when the user succesfully upload a new post
 # Create your views here.
 
@@ -61,7 +62,7 @@ def PostList(request):
 
 
 def post_detail(request, slug,  my_num):
-    user = request.user
+    user = request.user          
     post = get_object_or_404(Post, id=my_num)
     form = CommentForm()
     if request.user.is_authenticated:
@@ -77,6 +78,7 @@ def post_detail(request, slug,  my_num):
                 post.comment_set.create(comment=comment, post=post, name=user)
                 form = CommentForm()
     return render(request, 'post_detail.html', {'object': post, 'user': user, 'form': form})
+    
 # def view(request):
 #     ...
 #     cookie_state = request.COOKIES.get('viewed_post_%s' % post_name_slug)
@@ -88,6 +90,7 @@ def post_detail(request, slug,  my_num):
 #         Post.objects.filter(id=post.id).update(total_views=F('total_views') + 1)
 #                         response.set_cookie('viewed_post_%s' % post_name_slug , True, max_age=2678400)
 #     return response
+
 
 
 class TagListView(ListView):

@@ -11,8 +11,9 @@ from blog.forms import SearchForm
 from django.contrib.postgres.search import SearchVector, SearchRank, SearchQuery
 from django.views.generic import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from blog.models import Folder, PostPicture
 from django.urls import reverse
+import os
+from django.http import  HttpResponse
 # Create your views here.
 
 class SignUpView(generic.CreateView):
@@ -103,7 +104,7 @@ def PhotoUploadView(request, folder_id):
             new_form.folder = folder
             new_form.user = request.user
             new_form.save()
-            return redirect(reverse('blog:photo_upload', args=[folder_id]))
+            return HttpResponse('picture/<int:folder_id>/folder_id')
     return render(request, 'upload_photo.html', {'form': form})
 
         
@@ -112,3 +113,11 @@ def get_his_profile(request, his_id):
     user = get_object_or_404(get_user_model(), id=his_id)
     post = Post.objects.filter(author=user)
     return render(request, 'normal_user_profile.html', {'user': user, 'post': post})
+
+def photo_delete_view(request, photo_id):
+    photo = get_object_or_404(PostPicture, id=photo_id)
+    photo_dir = photo.photo.url
+    if request.method == 'POST' and photo.user == request.user:
+        os.remove(photo_dir)
+        photo.delete()
+    return render(request, '//')

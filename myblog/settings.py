@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'newsletter.apps.NewsletterConfig',
     'taggit',
     'django.contrib.postgres',
-    'tinymce',
 ]
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
@@ -147,20 +146,7 @@ LOGIN_REDIRECT_URL = '/blog/'
 LOGOUT_REDIRECT_URL = '/blog/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DEFAULT = {
-    'selector': 'textarea',
-    'theme': 'modern',
-    'plugins': 'link image preview codesample contextmenu table code lists',
-    'toolbar1': 'formatselect | bold italic underline | alignleft aligncenter alignright alignjustify '
-               '| bullist numlist | outdent indent | table | link image | codesample | preview code',
-    'toolbar2': 'visualblocks visualchars | charmap hr pagebreak nonbreaking anchor | code|',
-    'contextmenu': 'formats | link image',
-    'menubar': True,
-    'inline': False,
-    'statusbar': True,
-    'width': 'auto',
-    'height': 360,
-}
+
 
 MAILCHIMP_API_KEY = 'd5da7bad0ac824dd1ca84f5dc57db573-us2'
 MAILCHIMP_DATA_CENTER = 'us2'

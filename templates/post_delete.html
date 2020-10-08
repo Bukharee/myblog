@@ -23,7 +23,7 @@
     {% csrf_token %}
     <p>Are you sure you wanna delete {{ object.title }}</p>
 <input type="submit" value="DELETE">
-<button>Back To Home</button>
+<a href="{{ object.get_absolute_url }}">Back to post</a>
 </form>
 </body>
 </html>
