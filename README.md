@@ -1,2 +1,3 @@
 # myblog
 ### This is a nice blog that covers several functionalities such posting editind posts, deleting posts , updating posts, counting number of views, ability to comment, and lots more...
+![](images/table 1-1.png)
