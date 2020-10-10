@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'accounts.apps.AccountsConfig',
     'blog.apps.BlogConfig',
-    'newsletter.apps.NewsletterConfig',
     'taggit',
     'django.contrib.postgres',
 ]
