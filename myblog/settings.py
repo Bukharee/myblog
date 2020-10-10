@@ -83,16 +83,15 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myblog',
-        'USER': 'postgres',
-        'PASSWORD': '12152018b',
-        'HOST': 'localhost',
-        'PORT': '1080',
-        
-    }
-}
+ "default":
+ {
+  "ENGINE": "django.db.backends.postgresql_psycopg2", #one of those should work
+  'ENGINE': 'django.db.backends.postgresql',   #one of those should work
+  "NAME": 'myProject',
+  "HOST": "localhost",
+  "PORT": "5432",
+ }
+ }
 
 
 # Password validation
