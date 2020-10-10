@@ -22,7 +22,6 @@ from django.conf.urls.static import static
 from django.conf.urls import handler404
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView 
-from newsletter.views import subscribe
 sitemaps = {
     'post': PostSiteMap
 }
