@@ -45,7 +45,7 @@ class Post(models.Model):
     next_post = models.ForeignKey('self', related_name='next', on_delete=models.SET_NULL, blank=True, null=True)
     previous_post = models.ForeignKey('self', related_name='previous', on_delete=models.SET_NULL, blank=True, null=True)
     tags = TaggableManager()
-    search_vector = SearchVector(null=True)
+    search_vector = SearchVector(blank=True)
 
     def __str__(self):
         return str(self.title)
@@ -86,7 +86,7 @@ class Reply(models.Model):
 class PostPicture(models.Model):
     name = models.CharField(max_length=100)
     photo = models.ImageField(upload_to='postimage/%Y/%m/%d')
-    search_vector = SearchVector(null=True)
+    search_vector = SearchVector(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     folder= models.ForeignKey('Folder', on_delete=models.CASCADE)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
@@ -97,7 +97,7 @@ class PostPicture(models.Model):
 
 class Folder(models.Model):
     name = models.CharField(max_length=10)
-    search_vector = SearchVector(null=True)
+    search_vector = SearchVector(blank=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     def __str__(self):
