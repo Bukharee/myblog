@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -82,16 +83,7 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
- "default":
- {
-  "ENGINE": "django.db.backends.postgresql_psycopg2", #one of those should work
-  'ENGINE': 'django.db.backends.postgresql',   #one of those should work
-  "NAME": 'myProject',
-  "HOST": "localhost",
-  "PORT": "5432",
- }
- }
+DATABASES = {'default': dj_database_url.parse('postgres://ovvqcuvezurhmz:3a2f694bb7262e9bd6f1f481fc62ec97761cb01971d84b0eac011bf0010c008e@ec2-50-19-26-235.compute-1.amazonaws.com:5432/dhiqgkg7p9rjn')
 
 
 # Password validation

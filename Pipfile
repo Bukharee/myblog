@@ -23,6 +23,7 @@ social-auth-core = "==3.3.3"
 Markdown = "==3.2.1"
 Pillow = "==6.2.0"
 gunicorn = "==19.9.0"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.7"
