@@ -25,7 +25,7 @@ SECRET_KEY = '#1x53st&b#!!+#*ny+fk8q0-q(43d#b!v!j4wy35zs37zgwvn5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', 'gentle-everglades-85963.herokuapp.com']
 
 
 # Application definition
