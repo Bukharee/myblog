@@ -87,7 +87,8 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 DATABASES = {'default': dj_database_url.parse('postgres://ovvqcuvezurhmz:3a2f694bb7262e9bd6f1f481fc62ec97761cb01971d84b0eac011bf0010c008e@ec2-50-19-26-235.compute-1.amazonaws.com:5432/dhiqgkg7p9rjn')}
 
 
-# Password validation
+# Pas
+# sword validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
