@@ -52,7 +52,7 @@
     {% if request.user.is_staff  %}
     <div class="container-fluid top-background"
         style="width: 100%;  height: 280px; margin: 0; padding: 0; background-color: teal; ">
-        <img src={{ user.photo.url }} class="float-left" alt="..."
+        <img src={% if user.photo %}{{ user.photo.url }}{% else %} ""{% endif %}class="float-left" alt="..."
             style="border-radius: 7em; height: 13vw; border: 3px solid white; width: 13vw; margin: 50px 30px 8px 40px;">
             <br><br>
             <h4 class="text-center">{{ user.first_name }} {{ user.last_name }}({{ user.username }})</h4>
