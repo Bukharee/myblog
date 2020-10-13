@@ -5,11 +5,14 @@ from django.urls import reverse
 from taggit.managers import TaggableManager
 # Create your models here.
 from django.contrib.postgres.search import SearchVector
+
+
 class Category(models.Model):
     category = models.CharField(max_length=200)
 
     def __str__(self):
         return self.category
+
 
 class Comment(models.Model):
     name = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
@@ -20,14 +23,14 @@ class Comment(models.Model):
     def __str__(self):
         return self.comment
     
-    def get_absolute_url(self):
+    @staticmethod
+    def get_absolute_url():
         return reverse('blog:home', args=[])
+
 
 class PostView(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
-
-
 
 
 class Post(models.Model):
@@ -45,17 +48,16 @@ class Post(models.Model):
     next_post = models.ForeignKey('self', related_name='next', on_delete=models.SET_NULL, blank=True, null=True)
     previous_post = models.ForeignKey('self', related_name='previous', on_delete=models.SET_NULL, blank=True, null=True)
     tags = TaggableManager()
-    search_vector = SearchVector()
+    search_vector = SearchVector(blank=True, null=True)
 
     def __str__(self):
         return str(self.title)
 
-    
     def get_absolute_url(self):
-        return reverse('blog:postdetail', args=[str(self.title).replace(' ', '-').lower(), self.id,])
+        return reverse('blog:postdetail', args=[str(self.title).replace(' ', '-').lower(), self.id, ])
 
     def get_tag(self):
-        return reverse('blog:post_list_tag', args=[self.tags.slug,])
+        return reverse('blog:post_list_tag', args=[self.tags.slug, ])
 
     @property
     def comment_count(self):
@@ -83,12 +85,13 @@ class Reply(models.Model):
     def get_absolute_url(self):
         pass
 
+
 class PostPicture(models.Model):
     name = models.CharField(max_length=100)
     photo = models.ImageField(upload_to='postimage/%Y/%m/%d')
-    search_vector = SearchVector()
+    search_vector = SearchVector(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-    folder= models.ForeignKey('Folder', on_delete=models.CASCADE)
+    folder = models.ForeignKey('Folder', on_delete=models.CASCADE)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     def __str__(self):
@@ -114,6 +117,7 @@ class Folder(models.Model):
 
     def save_in_folder(self):
         return reverse('blog:photo_upload', args=[self.id])
+
 
 class Subscribe(models.Model):
     email = models.EmailField()
