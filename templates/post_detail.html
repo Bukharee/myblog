@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
-    {% load blog_tags %}
-    {% load crispy_forms_tags %}
+{% load static %}
+{% load blog_tags %}
+{% load crispy_forms_tags %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'fonts/Roboto-Regular.ttf'%}">
-    <link rel="stylesheet" href="{% static 'fonts/Nunito-Bold.ttf'%}">
-    <link rel="stylesheet" href="{% static 'fonts/IndieFlower-Regular.ttf'%}">
+    <link rel="stylesheet" href="{% static 'fonts/Roboto-Regular.ttf' %}">
+    <link rel="stylesheet" href="{% static 'fonts/Nunito-Bold.ttf' %}">
+    <link rel="stylesheet" href="{% static 'fonts/IndieFlower-Regular.ttf' %}">
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
-    <link rel="stylesheet" href="{% static 'fonts/Pacifico-Regular.ttf'%}">
+    <link rel="stylesheet" href="{% static 'fonts/Pacifico-Regular.ttf' %}">
     <title>{{ object.title }}</title>
     <style>
         .container input[type=submit] {
@@ -25,31 +25,37 @@
             /* border-radius: .8em; */
             font-size: 20px;
         }
+
         .container input[type=submit] :focus {
             border: none
         }
+
         .my-col {
             border: .6px solid gray;
             margin: 5px;
             padding: 2px 20px 20px 20px;
             background-color: teal;
         }
+
         .linked {
             text-decoration: none;
             display: block;
             color: white;
         }
+
         .linked:hover {
             text-decoration: none;
             color: white;
         }
+
         .my-list {
-            color: white; 
-            background: teal; 
-            padding:10px;
+            color: white;
+            background: teal;
+            padding: 10px;
             border-radius: 8em;
             margin: 6px;
         }
+
         .post-body img {
             width: 100%;
             height: auto;
@@ -59,53 +65,70 @@
     </style>
 </head>
 <body>
-    {% include 'header.html' %}
-    <form class="container">
-    <h4 class="text-center" style="font-family:'Roboto' sans-serif; color: teal; text-shadow: none;">{{object.title.upper}}</h4>
-    <h6 style="color: black; font-family: Indie Flower; font-size: 1em;" class="text-center"><a href="/accounts/get_profile/{{ object.author.id }}"><img src="{{ object.author.photo.url }}" class="img-fluid" alt="" width="50" height="50" style="border-radius:50px;"></a>
-    Published By <strong>{{ object.author }}</strong> On {{ object.publish }}<strong></strong>  <i class="fas fa-tags"></i> {{ object.tags.all|join:", " }}</h6>
+{% include 'header.html' %}
+<div class="container">
+    <h4 class="text-center"
+        style="font-family:'Roboto' sans-serif; color: teal; text-shadow: none;">{{ object.title.upper }}</h4>
+    <h6 style="color: black; font-family: Indie Flower; font-size: 1em;" class="text-center"><a
+            href="/accounts/get_profile/{{ object.author.id }}"><img src="{{ object.author.photo.url }}"
+                                                                     class="img-fluid" alt="" width="50" height="50"
+                                                                     style="border-radius:50px;"></a>
+        Published By <strong>{{ object.author }}</strong> On {{ object.publish }}<strong></strong> <i
+                class="fas fa-tags"></i> {{ object.tags.all|join:", " }}</h6>
     <p>
         {% if request.user == object.author %}
-        <ul class="list-inline text-center">
-            <li class="list-inline-item text-left my-list"><a  style="color: white; display: block;" href="{{ object.get_deleted}}"><i class="fa fa-trash icon" aria-hidden="true" ></i>  DELETE THIS POST</a></li>
-            <li class="list-inline-item text-right my-list"><a style="color: white; display: block;" href="{{ object.get_updated }}"><i class="fa fa-wrench" aria-hidden="true"></i> UPDATE THIS POST</a></li>
-        </ul>
+            <ul class="list-inline text-center">
+                <li class="list-inline-item text-left my-list"><a style="color: white; display: block;"
+                                                                  href="{{ object.get_deleted }}"><i
+                        class="fa fa-trash icon" aria-hidden="true"></i> DELETE THIS POST</a></li>
+                <li class="list-inline-item text-right my-list"><a style="color: white; display: block;"
+                                                                   href="{{ object.get_updated }}"><i
+                        class="fa fa-wrench" aria-hidden="true"></i> UPDATE THIS POST</a></li>
+            </ul>
         {% endif %}
-    </p>
-    <br>
-    
-    <div class="container-fluid">
-    <img src="{{ object.post_picture.url }}" class="img-fluid  mx-auto d-block" alt="">
-    </div>
-    <div class="all text-justify text-break post-body" style="margin: 15px; padding: 10px; font-family:'Nunito' cursive; color:black; line-height: 30px;">{{object.body|markdown}}</div>
-    {% if object.previous_post and object.next_post %}
-    <div class="container-fluid">
-   <div class="row justify-content-between">
-    <div class="col-4 text-center my-col"><p style="padding: 0; margin: 0; color: orange;">Previous post</p><a href="{{ object.next_post.get_absolute_url }}" class="linked"><i class="fa fa-backward"></i> {{object.previous_post.title.upper }}</a></div>
-       <div class="col-4 text-center my-col"><p style="padding: 0; margin: 0; color: orange;">Next post</p><a href="{{ object.previous_post.get_absolute_url }}" class="linked">{{object.next_post.title.upper }} <i class="fa fa-forward"></i></a></div>
-   </div>
 </div>
+<br>
+
+<div class="container-fluid">
+    <img src="{{ object.post_picture.url }}" class="img-fluid  mx-auto d-block" alt="">
+</div>
+<div class="all text-justify text-break post-body"
+     style="margin: 15px; padding: 10px; font-family:'Nunito' cursive; color:black; line-height: 30px;">{{ object.body|markdown }}</div>
+{% if object.previous_post and object.next_post %}
+    <div class="container-fluid">
+        <div class="row justify-content-between">
+            <div class="col-4 text-center my-col"><p style="padding: 0; margin: 0; color: orange;">Previous post</p><a
+                    href="{{ object.next_post.get_absolute_url }}" class="linked"><i
+                    class="fa fa-backward"></i> {{ object.previous_post.title.upper }}</a></div>
+            <div class="col-4 text-center my-col"><p style="padding: 0; margin: 0; color: orange;">Next post</p><a
+                    href="{{ object.previous_post.get_absolute_url }}" class="linked">{{ object.next_post.title.upper }}
+                <i class="fa fa-forward"></i></a></div>
+        </div>
+    </div>
+{% endif %}
+<div style="background-color: teal; width: 100%; padding: 8px; margin-top: 0;">
+    {% if object.comme %}
+        <p class="text-center"> COMMENTS </p>
     {% endif %}
-    <div style="background-color: teal; width: 100%; padding: 8px; margin-top: 0;">
-        {% if object.comme %}
-          <p class="text-center"> COMMENTS </p>
-        {% endif %}
     {% for comments in object.comment_set.all %}
-    <ul>
-        <li style="color: white; list-style-type: none;"><img src="{{comments.name.photo.url}}" width="40", height="40" style="border-radius: 7em;">  {{ comments }}</li>
-    </ul>
+        <ul>
+            <li style="color: white; list-style-type: none;"><img src="{{ comments.name.photo.url }}" alt="photo"
+                                                                  width="40" height="40"
+                                                                  style="border-radius: 7em;"> {{ comments }}</li>
+        </ul>
     {% endfor %}
     {% if request.user.is_authenticated %}
 
-    <form action="">
-        {{ form|crispy }}
-        <input type="submit" value="COMMENT">
-    </form>
+        <form action="">
+            {{ form|crispy }}
+            <input type="submit" value="COMMENT">
+        </form>
     {% else %}
-    <p class="text-center border"><a href="{% url 'login' %}" style="color: white; display: block;">  Login Here To Comment </a></p>
+        <p class="text-center border"><a href="{% url 'login' %}" style="color: white; display: block;"> Login Here To
+            Comment </a></p>
     {% endif %}
 </div>
 
-    {% include "footer.html" %}
+{% include "footer.html" %}
 </body>
 </html>

@@ -5,7 +5,7 @@ from accounts.views import folder, FolderDeleteView, Rename, PhotoUploadView
 app_name = "blog"
 
 urlpatterns = [
-    path('blog/', PostList, name='home'),
+    path('', PostList, name='home'),
     path('detail/<str:slug>/<int:my_num>/',post_detail, name='postdetail'),
     path('add_post', CreatePost.as_view(), name='new_post'),
     path('delete/<int:pk>', PostDelete.as_view(), name='delete'),

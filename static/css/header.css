@@ -1,12 +1,13 @@
 a {
     text-decoration: none;
-    color: teal;
 
 }
 
 nav {
     background-color:white;
     box-shadow: 2px 2px 2px rgb(0, 128, 128, 0.2);
+    -webkit-box-shadow: 2px 2px 2px rgb(0, 128, 128, 0.2);
+    -moz-box-shadow: 2px 2px 2px rgb(0, 128, 128, 0.2);
     border-radius: 6px;
     margin-bottom: 5px;
     position: sticky;
@@ -28,11 +29,17 @@ nav {
 .madanni {
     background-color:white;
     color: teal;
-    margin: 10px 5px 10px 5px;       
+    margin: 10px 5px 10px 5px;
     border-radius: 0.8em;
     border: 2px teal solid;
     font-weight: 300;
     display: block;
+}
+.madanni a{
+    display: block;
+    color: teal;
+    text-align: center;
+
 }
 
 
@@ -44,8 +51,10 @@ nav {
     border-radius: .8em;
     transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-.madanni  a:hover {
+
+.madanni:hover a{
     color: white;
+    display: block;
 }
 .card-body > p > a {
     color: teal;

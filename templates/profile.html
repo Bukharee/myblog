@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
-    <title>Document</title>
+    <title>{{ user.username }}'s Dashboard</title>
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <style>
         button {
@@ -88,9 +88,9 @@
 <li class="list-group-item text-center"><div class="btn-group">
    <strong>SOCIALS <i class="fab fa-user"></i></strong>
    </div></li>
-<li class="list-group-item "><a href="{{ user.facebook }}">FACEBOOK  <i class="fab fa-facebook" style="color: blue;"></i></a></li>
-<li class="list-group-item"><a href="{{ user.twitter }}">TWITTER     <i class="fab fa-twitter" style="color: rgb(109, 89, 223);"></i></a></li>
-<li class="list-group-item"><a href="{{ user.github }}">INSTAGRAM   <i class="fab fa-instagram" style="color: hotpink"></i></a></li>
+<li class="list-group-item "><a href="//{{ user.facebook }}">FACEBOOK  <i class="fab fa-facebook" style="color: blue;"></i></a></li>
+<li class="list-group-item"><a href="//{{ user.twitter }}">TWITTER     <i class="fab fa-twitter" style="color: rgb(109, 89, 223);"></i></a></li>
+<li class="list-group-item"><a href="//{{ user.github }}">INSTAGRAM   <i class="fab fa-instagram" style="color: hotpink"></i></a></li>
 <li class="list-group-item"><a href="mailto:{{user.email}}">EMAIL  <i class="fa fa-envelope" aria-hidden="true" style="color: red"></i></a> </li>
 </ul>
    </div>
