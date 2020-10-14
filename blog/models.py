@@ -48,7 +48,6 @@ class Post(models.Model):
     next_post = models.ForeignKey('self', related_name='next', on_delete=models.SET_NULL, blank=True, null=True)
     previous_post = models.ForeignKey('self', related_name='previous', on_delete=models.SET_NULL, blank=True, null=True)
     tags = TaggableManager()
-    content = models.CharField(null=True, blank=True, max_length=300)
     search_vector = SearchVector(blank=True, null=True)
 
     def __str__(self):
