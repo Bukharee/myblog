@@ -21,7 +21,7 @@ class CreatePost(UserPassesTestMixin, CreateView):
     the post was published upon submission a newly post appear on the list of posts page."""
     form_class = PostForm  #
     template_name = 'add_post.html'   # this is the page name that the form will display
-    success_url = 'blog:home' #  this is the url of the page you will  be take after submitting the form
+    success_url = '/' #  this is the url of the page you will  be take after submitting the form
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super(CreatePost, self).form_valid(form)
