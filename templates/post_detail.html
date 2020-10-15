@@ -70,7 +70,7 @@
     <h4 class="text-center"
         style="font-family:'Roboto' sans-serif; color: teal; text-shadow: none;">{{ object.title.upper }}</h4>
     <h6 style="color: black; font-family: Indie Flower; font-size: 1em;" class="text-center"><a
-            href="/accounts/get_profile/{{ object.author.id }}"><img src="{{ object.author.photo.url }}"
+            href="/accounts/get_profile/{{ object.author.id }}">{% if object.author.photo %}<img src="{{ object.author.photo.url }}{% else %}{% static 'images/profile.jpg' %}{% endif %}"
                                                                      class="img-fluid" alt="" width="50" height="50"
                                                                      style="border-radius:50px;"></a>
         Published By <strong>{{ object.author }}</strong> On {{ object.publish }}<strong></strong> <i
