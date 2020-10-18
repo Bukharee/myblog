@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#1x53st&b#!!+#*ny+fk8q0-q(43d#b!v!j4wy35zs37zgwvn5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*', 'gentle-everglades-85963.herokuapp.com']
 
