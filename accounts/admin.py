@@ -17,7 +17,8 @@ class UserAdmin(BaseUserAdmin):
             'twitter','is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions', 'last_login', 'date_joined')}),
     )
     list_display = ['email', 'username', 'bio', 'photo']
-    
+    search_fields = ['username', 'email']
+
 admin.site.register(CustomUser, UserAdmin)
 
 # (None, {'fields' : ('username', 'password')}), (_('Personal info'), {'fields':('first_name', 'last_name', 'email', 'name', 'contact')}),
