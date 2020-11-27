@@ -1,30 +1,32 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
-from .forms import UserCreationForm, CustomUserChangeForm
-from django.contrib.auth  import get_user_model
+from .forms import UserCreationForm
+from django.contrib.auth import get_user_model
 from .forms import UserEditForm, CreateFolderForm, PhotoUploadForm
-from .models import CustomUser
 from django.contrib.auth.decorators import login_required
 from blog.models import Post, PostPicture, Folder
 from blog.forms import SearchForm
 from django.contrib.postgres.search import SearchVector, SearchRank, SearchQuery
 from django.views.generic import CreateView, DeleteView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.urls import reverse
+from django.contrib.auth.mixins import UserPassesTestMixin
 import os
-from django.http import  HttpResponse
+from django.http import HttpResponse
+
+
 # Create your views here.
 
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
-    template_name  = 'signup.html'
+    template_name = 'signup.html'
+
 
 class Update(generic.UpdateView):
     model = get_user_model()
     success_url = reverse_lazy('blog:home')
     template_name = 'profile.html'
+
 
 def edit_user(request):
     user = request.user
@@ -36,7 +38,8 @@ def edit_user(request):
     else:
         form = UserEditForm(instance=user)
     return render(request, 'profile_edit.html', {'form': form})
-    
+
+
 @login_required
 def Dashboard(request):
     user = request.user
@@ -50,18 +53,22 @@ def Dashboard(request):
         if form.is_valid():
             query = form.cleaned_data['query']
             search_vector = SearchVector('title', weight='A') + SearchVector('body', weight='B')
-            search_query =  SearchQuery(query)
+            search_query = SearchQuery(query)
             results = Post.objects.annotate(
                 search=search_vector,
-                rank = SearchRank(search_vector, search_query)
+                rank=SearchRank(search_vector, search_query)
             ).filter(rank__gte=0.3).order_by('-rank')
-    return render(request, 'profile.html', {'user': user, 'post': post, 'search_form':form, 'query':query, 'results': results, 'folder': folder})
+    return render(request, 'profile.html',
+                  {'user': user, 'post': post, 'search_form': form, 'query': query, 'results': results,
+                   'folder': folder})
+
 
 def folder(request, folder_field=None):
     folder = get_object_or_404(Folder, id=folder_field)
     user = request.user
     images = PostPicture.objects.filter(folder=folder_field, user=user)
     return render(request, 'folder.html', {'folder': folder, 'images': images})
+
 
 class FolderCreateView(UserPassesTestMixin, CreateView):
     form_class = CreateFolderForm
@@ -75,9 +82,10 @@ class FolderCreateView(UserPassesTestMixin, CreateView):
     def test_func(self):
         return self.request.user.is_staff
 
+
 class FolderDeleteView(UserPassesTestMixin, DeleteView):
     model = Folder
-    fields = ['name',]
+    fields = ['name', ]
     template_name = 'folder_delete.html'
     success_url = reverse_lazy('account:dash')
 
@@ -85,14 +93,16 @@ class FolderDeleteView(UserPassesTestMixin, DeleteView):
         obj = self.get_object()
         return obj.user == self.request.user
 
+
 class Rename(UserPassesTestMixin, UpdateView):
     model = Folder
-    fields = ('name', )
+    fields = ('name',)
     template_name = 'folder_rename.html'
 
     def test_func(self):
         obj = self.get_object()
         return obj.user == self.request.user
+
 
 def PhotoUploadView(request, folder_id):
     form = PhotoUploadForm()
@@ -107,12 +117,12 @@ def PhotoUploadView(request, folder_id):
             return HttpResponse('picture/<int:folder_id>/folder_id')
     return render(request, 'upload_photo.html', {'form': form})
 
-        
 
 def get_his_profile(request, his_id):
     user = get_object_or_404(get_user_model(), id=his_id)
     post = Post.objects.filter(author=user)
     return render(request, 'normal_user_profile.html', {'user': user, 'post': post})
+
 
 def photo_delete_view(request, photo_id):
     photo = get_object_or_404(PostPicture, id=photo_id)

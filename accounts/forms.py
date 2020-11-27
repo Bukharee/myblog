@@ -13,7 +13,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email', ]
+        fields = ['username', 'email',]
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -39,7 +39,8 @@ class CustomUserChangeForm(UserChangeForm):
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'username', 'email', 'photo', 'bio', 'github', 'facebook', 'twitter']
+        fields = ['first_name', 'last_name', 'username', 'email', 'photo',
+         'bio', 'github', 'facebook', 'twitter']
 
 
 class CreateFolderForm(forms.ModelForm):

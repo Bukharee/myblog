@@ -124,7 +124,7 @@
             <input type="submit" value="COMMENT">
         </form>
     {% else %}
-        <p class="text-center border"><a href="{% url 'login' %}" style="color: white; display: block;"> Login Here To
+        <p class="text-center border"><a href="{% url 'login' %}?next=/detail/{{ object.slug }}/{{ object.id }}" style="color: white; display: block;"> Login Here To
             Comment </a></p>
     {% endif %}
 </div>

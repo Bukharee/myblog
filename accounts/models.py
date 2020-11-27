@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 class CustomUser(AbstractUser):
-    photo = models.ImageField(upload_to='https://drive.google.com/drive/u/0/folders/1_d0e9x797iOCWcerU4BGWisx52lxTD62?lfhs=2/users/%Y/%m/%d/', blank=True)
+    photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
     bio = models.CharField(max_length=200, )
     github = models.CharField(blank=True, max_length=50)
     facebook = models.CharField(blank=True, max_length=50)

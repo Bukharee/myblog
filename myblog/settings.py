@@ -145,14 +145,15 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_POST = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "idrisbukhariauwal@gmail.com"
-EMAIL_HOST_PASSWORD = "bukhareee"
-
-
+EMAIL_HOST_USER = 'idrisbukhariauwal@gmail.com'
+EMAIL_USE_SSL= False
+EMAIL_HOST_PASSWORD = 'bukhareee'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 MAILCHIMP_API_KEY = 'd5da7bad0ac824dd1ca84f5dc57db573-us2'
 MAILCHIMP_DATA_CENTER = 'us2'

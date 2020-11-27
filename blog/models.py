@@ -35,7 +35,7 @@ class PostView(models.Model):
 
 class Post(models.Model):
     STATUS_CHOICES = (('published', 'Published'), ('draft', 'Draft'))
-    post_picture = models.ImageField(upload_to='/https://drive.google.com/drive/u/0/folders/1_d0e9x797iOCWcerU4BGWisx52lxTD62?lfhs=2post/%Y/%m/%d', null=True,)
+    post_picture = models.ImageField(upload_to='post_pic/%Y/%m/%d', null=True,)
     title = models.CharField(max_length=225)
     body = models.TextField()
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

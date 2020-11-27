@@ -16,4 +16,4 @@ urlpatterns = [
     path('folder/delete/<int:pk>', FolderDeleteView.as_view(), name='delete_folder'),
     path('folder/update/<int:pk>', Rename.as_view(), name='folder_rename'),
     path('picture/<int:folder_id>/', PhotoUploadView, name='photo_upload')
-]                                          
+]
