@@ -1,113 +1,10 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-<style>
-  .entire {
-    max-width: 1080px;
-    margin: auto;
-  }
-  #top-section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-  }
-  #massive-card {
-    display: flex;
-    flex-direction: column;
-    width: 500px;
-    margin-right: 50px;
-  }
-  #massive-card img {
-    aspect-ratio: 250 / 140.109;
-    width: 100%;
-    height: auto;
-  }
-  #massive-card .post-title,
-  .side-post .post-title {
-    font-weight: 900;
-    font-size: larger;
-  }
-  .side-post .card-body {
-    margin-left: 10px;
-  }
-  #massive-card .date-comment-views,
-  .side-post .card-body .date-comment-views {
-    display: flex;
-    justify-content: space-between;
-    font-size: small;
-    width: 260px;
-  }
-  .card-body {
-    display: flex;
-    flex-direction: column;
-  }
-  /* #massive-card img {
-    width: 100%;
-    height: auto;
-  } */
-  #side-posts {
-    display: flex;
-    flex-direction: column;
-    width: 500px;
-    justify-content: space-between;
-  }
-  .side-post {
-    display: flex;
-    margin-bottom: 20px;
-  }
-  .section-title {
-    margin-bottom: 40px;
-  }
-  .side-post img {
-    aspect-ratio: 250 / 140.109;
-    width: 40%;
-    height: auto;
-  }
-  @media screen and (max-width: 1049px) {
-    .section-title {
-      margin-left: 30px;
-    }
-    #massive-card {
-      margin-right: unset;
-      margin-bottom: 30px;
-    }
-  }
-  @media screen and (max-width: 550px) {
-    .side-post {
-      flex-direction: column;
-      width: 70vw;
-    }
-    .side-post img {
-      width: 70vw;
-    }
-    #side-posts {
-      width: unset;
-    }
-    .side-post .card-body {
-      margin: unset;
-    }
-    #massive-card .date-comment-views,
-    .side-post .card-body .date-comment-views {
-      font-size: xx-small;
-      max-width: 200px;
-      font-weight: bolder;
-      margin: 6px;
-    }
-    #massive-card .post-title,
-    .side-post .post-title {
-      font-size: medium;
-    }
-    #massive-card img {
-      width: 99%;
-    }
-    #massive-card {
-      width: 85%;
-    }
-  }
-</style>
-<br />
-<br />
-<br />
-<br />
 
+<br />
+<br />
+<br />
+<br />
+<link rel="stylesheet" href="{% static 'css/post_list.css' %}" />
 <div class="entire">
   <h1 class="section-title">|SECTION</h1>
   <div id="top-section">
@@ -174,7 +71,55 @@
   <h1 class="section-title">|SECTION</h1>
   <section>
     <article>
-        
+      <img src="{% static 'images/personal_b.png' %}" alt="" />
+      <div class="card-body">
+        <div class="date-comment-views">
+          <span>27, Nov, 2018</span>
+          <span>200views</span>
+          <span>50 Comments</span>
+        </div>
+        <div class="post-title">
+          99% of Python Devlopers Dont Actually Know How Tuple Comparison Works
+        </div>
+        <div class="post-description">
+          Leurom Ipsum Coming throughLeurom Ipsum Coming throughLeurom Ipsum
+          Coming throughLeurom Ipsum Coming throughLeurom Ipsum Coming
+        </div>
+      </div>
+    </article>
+    <article>
+      <img src="{% static 'images/personal_b.png' %}" alt="" />
+      <div class="card-body">
+        <div class="date-comment-views">
+          <span>27, Nov, 2018</span>
+          <span>200views</span>
+          <span>50 Comments</span>
+        </div>
+        <div class="post-title">
+          99% of Python Devlopers Dont Actually Know How Tuple Comparison Works
+        </div>
+        <div class="post-description">
+          Leurom Ipsum Coming throughLeurom Ipsum Coming throughLeurom Ipsum
+          Coming throughLeurom Ipsum Coming throughLeurom Ipsum Coming
+        </div>
+      </div>
+    </article>
+    <article>
+      <img src="{% static 'images/personal_b.png' %}" alt="" />
+      <div class="card-body">
+        <div class="date-comment-views">
+          <span>27, Nov, 2018</span>
+          <span>200views</span>
+          <span>50 Comments</span>
+        </div>
+        <div class="post-title">
+          99% of Python Devlopers Dont Actually Know How Tuple Comparison Works
+        </div>
+        <div class="post-description">
+          Leurom Ipsum Coming throughLeurom Ipsum Coming throughLeurom Ipsum
+          Coming throughLeurom Ipsum Coming throughLeurom Ipsum Coming
+        </div>
+      </div>
     </article>
   </section>
 </div>

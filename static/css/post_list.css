@@ -1,0 +1,150 @@
+:root {
+  --body--font: "Nunito", sans-serif;
+}
+
+.entire {
+  max-width: 1080px;
+  margin: auto;
+}
+#top-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 10px;
+}
+#massive-card {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin-right: 50px;
+}
+#massive-card img {
+  aspect-ratio: 250 / 140.109;
+  width: 100%;
+  height: auto;
+}
+#massive-card .post-title,
+.side-post .post-title,
+section article .card-body .post-title {
+  font-weight: 900;
+  font-size: larger;
+}
+.side-post .card-body {
+  margin-left: 10px;
+}
+#massive-card .date-comment-views,
+.side-post .card-body .date-comment-views {
+  display: flex;
+  justify-content: space-between;
+  font-size: small;
+  width: 260px;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+/* #massive-card img {
+    width: 100%;
+    height: auto;
+  } */
+#side-posts {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  justify-content: space-between;
+}
+.side-post {
+  display: flex;
+  margin-bottom: 20px;
+}
+.section-title {
+  margin-bottom: 40px;
+}
+.side-post img {
+  aspect-ratio: 250 / 140.109;
+  width: 40%;
+  height: auto;
+}
+section {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+section article {
+  width: 320px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+section article .card-body {
+  padding: 6px;
+}
+section article img {
+  aspect-ratio: 250 / 140.109;
+  width: 100%;
+  height: auto;
+}
+@media screen and (max-width: 1049px) {
+  .section-title {
+    margin-left: 30px;
+  }
+  #massive-card {
+    margin-right: unset;
+    margin-bottom: 30px;
+  }
+}
+@media screen and (max-width: 1019px) {
+  section {
+    display: flex;
+    justify-content: start;
+    margin: 10px;
+    width: 500px;
+    margin: auto;
+    flex-wrap: wrap;
+    gap: 35px;
+  }
+  section article {
+    width: 225px;
+  }
+}
+@media screen and (max-width: 550px) {
+  .side-post {
+    flex-direction: column;
+    width: 70vw;
+  }
+  .side-post img {
+    width: 70vw;
+  }
+  #side-posts {
+    width: unset;
+  }
+  .side-post .card-body {
+    margin: unset;
+  }
+  #massive-card .date-comment-views,
+  .side-post .card-body .date-comment-views {
+    font-size: xx-small;
+    max-width: 200px;
+    font-weight: bolder;
+    margin: 6px;
+  }
+  #massive-card .post-title,
+  .side-post .post-title {
+    font-size: medium;
+  }
+  #massive-card img {
+    width: 99%;
+  }
+  #massive-card {
+    width: 85%;
+  }
+  section {
+    width: 90vw;
+  }
+}
+@media screen and (max-width: 538px) {
+  section {
+    justify-content: center;
+  }
+  section article {
+    width: 70vw;
+  }
+}
