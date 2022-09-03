@@ -1,0 +1,138 @@
+.circular {
+  height: 100px;
+  width: 100px;
+  margin: 36px;
+  position: relative;
+  text-align: center;
+  place-items: center;
+  transform: scale(1.3);
+}
+.circular .inner {
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  left: 50%;
+  height: 80px;
+  width: 80px;
+  margin: -40px 0 0 -40px;
+  background: white;
+  border-radius: 100%;
+}
+.circular .number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+}
+.circular .bar {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: gainsboro;
+  border-radius: 100%;
+  clip: rect(0px, 100px, 100px, 50px);
+}
+.circle .bar .progress {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  clip: rect(0px, 50px, 100px, 0px);
+  background: linear-gradient(to top left, orange, teal);
+}
+.circle .left .progress {
+  z-index: 1;
+  animation: left 1s linear both;
+}
+
+@keyframes left {
+  100% {
+    transform: rotate(180deg);
+  }
+}
+.circle .python,
+.circle .javascript,
+.circle .django,
+.circle .react,
+.circle .html5,
+.circle .css,
+.circle .git {
+  transform: rotate(180deg);
+  z-index: 3;
+}
+
+.circle .python .progress {
+  animation: python 1s linear both;
+  animation-delay: 1s;
+}
+.circle .javascript .progress {
+  animation: javascript 1s linear both;
+  animation-delay: 1s;
+}
+.circle .django .progress {
+  animation: django 1s linear both;
+  animation-delay: 1s;
+}
+.circle .react .progress {
+  animation: react 1s linear both;
+  animation-delay: 1s;
+}
+.circle .html5 .progress {
+  animation: html5 1s linear both;
+  animation-delay: 1s;
+}
+.circle .css .progress {
+  animation: css 1s linear both;
+  animation-delay: 1s;
+}
+.circle .git .progress {
+  animation: git 1s linear both;
+  animation-delay: 1s;
+}
+@keyframes python {
+  100% {
+    transform: rotate(100deg);
+  }
+}
+@keyframes javascript {
+  100% {
+    transform: rotate(30deg);
+  }
+}
+@keyframes react {
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes django {
+  100% {
+    transform: rotate(84deg);
+  }
+}
+@keyframes html5 {
+  100% {
+    transform: rotate(150deg);
+  }
+}
+@keyframes css {
+  100% {
+    transform: rotate(150deg);
+  }
+}
+@keyframes git {
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .circular {
+    transform: scale(1.2);
+  }
+}
+@media screen and (max-width: 428px) {
+  .circular {
+    margin: 20px;
+  }
+}
