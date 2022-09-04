@@ -29,6 +29,10 @@ section article .card-body .post-title {
   font-weight: 900;
   font-size: larger;
 }
+section a {
+  text-decoration: none;
+  color: black;
+}
 .side-post .card-body {
   margin-left: 10px;
 }
