@@ -21,20 +21,22 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import handler404
 from django.contrib.staticfiles.storage import staticfiles_storage
-from django.views.generic.base import RedirectView 
+from django.views.generic.base import RedirectView
 sitemaps = {
     'post': PostSiteMap
 }
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
+    path('favicon.ico', RedirectView.as_view(
+        url=staticfiles_storage.url('img/favicon.ico'))),
     path('', include('blog.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django,contrib.sitemaps.views.sitemap'),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django,contrib.sitemaps.views.sitemap'),
     path('tinymce/', include('tinymce.urls')),
-    path('portpolio/', include('Portpolio.urls'))
+    path('', include('Portpolio.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

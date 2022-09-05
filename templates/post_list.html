@@ -6,11 +6,12 @@
 <br />
 <link rel="stylesheet" href="{% static 'css/post_list.css' %}" />
 <div class="entire">
-  <h1 class="section-title">|SECTION</h1>
+  <h1 class="section-title">|FEATURED</h1>
   <div id="top-section">
-    <a href="/detail/one/1">
+    {% for post in top_posts %} {% if forloop.counter == 1 %}
+    <a href="/detail/{{ post.slug }}">
       <div id="massive-card">
-        <img src="{% static 'images/personal_b.png' %}" alt="" />
+        <img src="{{ post.post_picture.url }}" alt="" />
         <div class="date-comment-views">
           <span>27, Nov, 2018</span>
           <span>200views</span>
@@ -25,10 +26,13 @@
         </div>
       </div>
     </a>
+    {% endif %} {% endfor %}
+
     <div id="side-posts">
-      <a href="/detail/one/1">
+      {% for post in top_posts %} {% if forloop.counter != 0 %}
+      <a href="/detail/{{ post.slug }}">
         <div class="side-post">
-          <img src="{% static 'images/personal_b.png' %}" alt="" />
+          <img src="{{ post.post_picture.url }}" alt="" />
           <div class="card-body">
             <div class="date-comment-views">
               <span>27, Nov, 2018</span>
@@ -42,50 +46,20 @@
           </div>
         </div>
       </a>
-      <a href="/detail/one/1">
-        <div class="side-post">
-          <img src="{% static 'images/personal_b.png' %}" alt="" />
-          <div class="card-body">
-            <div class="date-comment-views">
-              <span>27, Nov, 2018</span>
-              <span>200views</span>
-              <span>50 Comments</span>
-            </div>
-            <div class="post-title">
-              99% of Python Devlopers Dont Actually Know How Tuple Comparison
-              Works
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="/detail/one/1">
-        <div class="side-post">
-          <img src="{% static 'images/personal_b.png' %}" alt="" />
-          <div class="card-body">
-            <div class="date-comment-views">
-              <span>27, Nov, 2018</span>
-              <span>200views</span>
-              <span>50 Comments</span>
-            </div>
-            <div class="post-title">
-              99% of Python Devlopers Dont Actually Know How Tuple Comparison
-              Works
-            </div>
-          </div>
-        </div>
-      </a>
+      {% endif %} {% endfor %}
     </div>
   </div>
-  <h1 class="section-title">|SECTION</h1>
+  {% for category, posts in post.items %}
+  <h1 class="section-title">|{{ category.category }}</h1>
   <section>
-    <a href="/detail/one/1">
+    {% for p in posts %}
+    <a href="/detail/{{ p.slug }}">
       <article>
-        <img src="{% static 'images/personal_b.png' %}" alt="" />
+        <img src="{{ p.post_picture.url }}" alt="" />
         <div class="card-body">
           <div class="date-comment-views">
-            <span>27, Nov, 2018</span>
+            <span>{{p.publish}}</span>
             <span>200views</span>
-            <span>50 Comments</span>
           </div>
           <div class="post-title">
             99% of Python Devlopers Dont Actually Know How Tuple Comparison
@@ -98,46 +72,12 @@
         </div>
       </article>
     </a>
-    <a href="/detail/one/1">
-      <article>
-        <img src="{% static 'images/personal_b.png' %}" alt="" />
-        <div class="card-body">
-          <div class="date-comment-views">
-            <span>27, Nov, 2018</span>
-            <span>200views</span>
-            <span>50 Comments</span>
-          </div>
-          <div class="post-title">
-            99% of Python Devlopers Dont Actually Know How Tuple Comparison
-            Works
-          </div>
-          <div class="post-description">
-            Leurom Ipsum Coming throughLeurom Ipsum Coming throughLeurom Ipsum
-            Coming throughLeurom Ipsum Coming throughLeurom Ipsum Coming
-          </div>
-        </div>
-      </article>
-    </a>
-    <a href="/detail/one/1">
-      <article>
-        <img src="{% static 'images/personal_b.png' %}" alt="" />
-        <div class="card-body">
-          <div class="date-comment-views">
-            <span>27, Nov, 2018</span>
-            <span>200views</span>
-            <span>50 Comments</span>
-          </div>
-          <div class="post-title">
-            99% of Python Devlopers Dont Actually Know How Tuple Comparison
-            Works
-          </div>
-          <div class="post-description">
-            Leurom Ipsum Coming throughLeurom Ipsum Coming throughLeurom Ipsum
-            Coming throughLeurom Ipsum Coming throughLeurom Ipsum Coming
-          </div>
-        </div>
-      </article>
-    </a>
+    {% endfor %}
   </section>
+  {% endfor %}
 </div>
+<form action="" method="post">
+  {{ subscribingform }} {% csrf_token %}
+  <input type="submit" value="subscribe" />
+</form>
 {% endblock %}

@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'taggit',
     'django.contrib.postgres',
     'Portpolio.apps.PortpolioConfig',
+    'ckeditor',  # HTML Editor
+    'ckeditor_uploader',
 ]
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
@@ -82,6 +84,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myblog.wsgi.application'
 
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+# Only Image files are allowed for uploads
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -134,7 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -152,7 +158,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_POST = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'idrisbukhariauwal@gmail.com'
-EMAIL_USE_SSL= False
+EMAIL_USE_SSL = False
 EMAIL_HOST_PASSWORD = 'bukhareee'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 

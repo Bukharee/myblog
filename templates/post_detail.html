@@ -19,6 +19,19 @@
     width: 80%;
     margin: auto;
   }
+  #article-detail h2 {
+    color: teal;
+  }
+  #article-detail h3,
+  #article-detail h4,
+  #article-detail h5,
+  #article-detail h6 {
+    color: orange;
+  }
+  #article-detail pre {
+    background-color: #dddddd;
+    padding: 5px;
+  }
   .article-body p {
     color: rgb(37, 36, 36);
   }
@@ -39,111 +52,21 @@
 <br />
 <div class="entire" style="max-width: 1080px; margin: auto">
   <article id="article-detail">
-    <h1>
-      99% Percent of python devlopers dont know how tuple comparison works,
-      Here's a comprehensive guide.
-    </h1>
-    <a href="/portpolio" class="link-back">
+    <h1>{{object.title | upper}}</h1>
+    <a href="/" class="link-back">
       <img src="{% static 'images/favicon.ico' %}" alt="" />
       <span
-        >Written <span style="font-weight: bolder">Bukahri Auwal Idris</span> on
-        <span style="font-weight: bolder">27,Nov,2022.</span></span
+        >Written
+        <span style="font-weight: bolder; color: orange"
+          >Bukahri Auwal Idris</span
+        >
+        on
+        <span style="font-weight: bolder; color: teal"
+          >{{ object.publish }}</span
+        ></span
       >
     </a>
-    <div class="article-body">
-      <p>
-        2.19. Writing a Simple Recursive Descent Parser Problem You need to
-        parse text according to a set of grammar rules and perform actions or
-        build an abstract syntax tree representing the input. The grammar is
-        small, so you’d prefer to just write the parser yourself as opposed to
-        using some kind of framework. Solution In this problem, we’re focused on
-        the problem of parsing text according to a particular grammar. In order
-        to do this, you should probably start by having a formal specification
-        of the grammar in the form of a BNF or EBNF. For example, a grammar for
-        simple arithmetic expressions might look like this: expr ::= expr + term
-        | expr - term | term term ::= term * factor | term / factor | factor
-        factor ::= ( expr ) | NUM Or, alternatively, in EBNF form: 2.19. Writing
-        a Simple Recursive Descent Parser | 69 www.it-ebooks.info 2.19. Writing
-        a Simple Recursive Descent Parser Problem You need to parse text
-        according to a set of grammar rules and perform actions or build an
-        abstract syntax tree representing the input. The grammar is small, so
-        you’d prefer to just write the parser yourself as opposed to using some
-        kind of framework. Solution In this problem, we’re focused on the
-        problem of parsing text according to a particular grammar. In order to
-        do this, you should probably start by having a formal specification of
-        the grammar in the form of a BNF or EBNF. For example, a grammar for
-        simple arithmetic expressions might look like this: expr ::= expr + term
-        | expr - term | term term ::= term * factor | term / factor | factor
-        factor ::= ( expr ) | NUM Or, alternatively, in EBNF form: 2.19. Writing
-        a Simple Recursive Descent Parser | 69 www.it-ebooks.info 2.19. Writing
-        a Simple Recursive Descent Parser Problem You need to parse text
-      </p>
-      <br />
-      <img src="{% static 'images/personal_b.png' %}" alt="" />
-      <br />
-      <br />
-      <p>
-        according to a set of grammar rules and perform actions or build an
-        abstract syntax tree representing the input. The grammar is small, so
-        you’d prefer to just write the parser yourself as opposed to using some
-        kind of framework. Solution In this problem, we’re focused on the
-        problem of parsing text according to a particular grammar. In order to
-        do this, you should probably start by having a formal specification of
-        the grammar in the form of a BNF or EBNF. For example, a grammar for
-        simple arithmetic expressions might look like this: expr ::= expr + term
-        | expr - term | term term ::= term * factor | term / factor | factor
-        factor ::= ( expr ) | NUM Or, alternatively, in EBNF form: 2.19. Writing
-        a Simple Recursive Descent Parser | 69 www.it-ebooks.info 2.19. Writing
-        a Simple Recursive Descent Parser Problem You need to parse text
-        according to a set of grammar rules and perform actions or build an
-        abstract syntax tree representing the input. The grammar is small, so
-        you’d prefer to just write the parser yourself as opposed to using some
-        kind of framework. Solution In this problem, we’re focused on the
-        problem of parsing text according to a particular grammar. In order to
-        do this, you should probably start by having a formal specification of
-        the grammar in the form of a BNF or EBNF. For example, a grammar for
-        simple arithmetic expressions might look like this: expr ::= expr + term
-        | expr - term | term term ::= term * factor | term / factor | factor
-        factor ::= ( expr ) | NUM Or, alternatively, in EBNF form: 2.19. Writing
-        a Simple Recursive Descent Parser | 69 www.it-ebooks.info 2.19. Writing
-        a Simple Recursive Descent Parser Problem You need to parse text
-        according to a set of grammar rules and perform actions or build an
-        abstract syntax tree representing the input. The grammar is small, so
-        you’d prefer to just write the parser yourself as opposed to using some
-        kind of framework. Solution In this problem, we’re focused on the
-        problem of parsing text according to a particular grammar. In order to
-        do this, you should probably start by having a formal specification of
-        the grammar in the form of a BNF or EBNF. For example, a grammar for
-        simple arithmetic expressions might look like this: expr ::= expr + term
-        | expr - term | term term ::= term * factor | term / factor | factor
-        factor ::= ( expr ) | NUM Or, alternatively, in EBNF form: 2.19. Writing
-        a Simple Recursive Descent Parser | 69 www.it-ebooks.info 2.19. Writing
-        a Simple Recursive Descent Parser Problem You need to parse text
-        according to a set of grammar rules and perform actions or build an
-        abstract syntax tree representing the input. The grammar is small, so
-        you’d prefer to just write the parser yourself as opposed to using some
-        kind of framework. Solution In this problem, we’re focused on the
-        problem of parsing text according to a particular grammar. In order to
-        do this, you should probably start by having a formal specification of
-        the grammar in the form of a BNF or EBNF. For example, a grammar for
-        simple arithmetic expressions might look like this: expr ::= expr + term
-        | expr - term | term term ::= term * factor | term / factor | factor
-        factor ::= ( expr ) | NUM Or, alternatively, in EBNF form: 2.19. Writing
-        a Simple Recursive Descent Parser | 69 www.it-ebooks.info 2.19. Writing
-        a Simple Recursive Descent Parser Problem You need to parse text
-        according to a set of grammar rules and perform actions or build an
-        abstract syntax tree representing the input. The grammar is small, so
-        you’d prefer to just write the parser yourself as opposed to using some
-        kind of framework. Solution In this problem, we’re focused on the
-        problem of parsing text according to a particular grammar. In order to
-        do this, you should probably start by having a formal specification of
-        the grammar in the form of a BNF or EBNF. For example, a grammar for
-        simple arithmetic expressions might look like this: expr ::= expr + term
-        | expr - term | term term ::= term * factor | term / factor | factor
-        factor ::= ( expr ) | NUM Or, alternatively, in EBNF form: 2.19. Writing
-        a Simple Recursive Descent Parser | 69 www.it-ebooks.info
-      </p>
-    </div>
+    <div class="article-body">{{ object.body|safe }}</div>
   </article>
 </div>
 {% endblock %}

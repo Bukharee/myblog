@@ -6,11 +6,11 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from tinymce import TinyMCE
 
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['comment',]
-       
+        fields = ['comment', ]
 
 
 class ReplyForm(forms.ModelForm):
@@ -19,6 +19,7 @@ class ReplyForm(forms.ModelForm):
         model = Reply
         fields = ['name', 'text']
 
+
 class TinyMCEWidget(TinyMCE):
     def use_required_attribute(self, **kwargs):
         return False
@@ -26,17 +27,18 @@ class TinyMCEWidget(TinyMCE):
 
 class PostForm(forms.ModelForm):
     class Meta:
-        model = Post 
+        model = Post
         slug = str(Post.title).replace(' ', '-')
         publish = timezone.now()
-        fields = ['post_picture', 'title', 'body', 'category', 'tags', 'next_post', 'previous_post']
-        
+        fields = ['title', 'body', 'category',
+                  'tags', 'next_post', 'previous_post']
 
 
 class SearchForm(forms.Form):
     query = forms.CharField(widget=forms.TextInput(attrs={}), label="")
 
+
 class SubscribingForm(forms.ModelForm):
     class Meta:
         model = Subscribe
-        fields = ['email',]
+        fields = ['email', ]

@@ -9,11 +9,12 @@ from blog.models import PostPicture, Folder
 
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label='Password confirmation', widget=forms.PasswordInput)
 
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email',]
+        fields = ['first_name', 'last_name', 'username', 'email', ]
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -40,7 +41,7 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ['first_name', 'last_name', 'username', 'email', 'photo',
-         'bio', 'github', 'facebook', 'twitter']
+                  'bio', 'github', 'facebook', 'twitter']
 
 
 class CreateFolderForm(forms.ModelForm):

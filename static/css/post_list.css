@@ -22,6 +22,7 @@
   aspect-ratio: 250 / 140.109;
   width: 100%;
   height: auto;
+  object-fit: cover;
 }
 #massive-card .post-title,
 .side-post .post-title,
@@ -68,6 +69,7 @@ section a {
   aspect-ratio: 250 / 140.109;
   width: 40%;
   height: auto;
+  object-fit: cover;
 }
 section {
   display: flex;
@@ -85,13 +87,14 @@ section article img {
   aspect-ratio: 250 / 140.109;
   width: 100%;
   height: auto;
+  object-fit: cover;
 }
 @media screen and (max-width: 1049px) {
   .section-title {
     margin-left: 30px;
   }
   #massive-card {
-    margin-right: unset;
+    margin: auto;
     margin-bottom: 30px;
   }
 }

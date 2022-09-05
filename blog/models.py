@@ -1,3 +1,5 @@
+from email.policy import default
+from xmlrpc.client import Boolean
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils import timezone
@@ -5,6 +7,7 @@ from django.urls import reverse
 from taggit.managers import TaggableManager
 # Create your models here.
 from django.contrib.postgres.search import SearchVector
+from ckeditor.fields import RichTextField
 
 
 class Category(models.Model):
@@ -18,37 +21,38 @@ class Comment(models.Model):
     name = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
-    comment = models.TextField(max_length=500)
+    comment = models.TextField()
+    # reply = models.ForeignKey('self', on_delete=models.CASCADE, related_name=f'{id}+')
 
     def __str__(self):
         return self.comment
-    
+
     @staticmethod
     def get_absolute_url():
         return reverse('blog:home', args=[])
-
-
-class PostView(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    post = models.ForeignKey('Post', on_delete=models.CASCADE)
 
 
 class Post(models.Model):
     STATUS_CHOICES = (('published', 'Published'), ('draft', 'Draft'))
     post_picture = models.ImageField(upload_to='post_pic/%Y/%m/%d', null=True,)
     title = models.CharField(max_length=225)
-    body = models.TextField()
+    body = RichTextField(
+        'Blog', help_text='Edit and enter text just like MS Word.')
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     publish = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField()
     created = models.DateTimeField(default=timezone.now())
     updated = models.DateTimeField(default=timezone.now())
-    status = models.CharField(choices=STATUS_CHOICES, default='draft', max_length=20)
+    status = models.CharField(choices=STATUS_CHOICES,
+                              default='draft', max_length=20)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    next_post = models.ForeignKey('self', related_name='next', on_delete=models.SET_NULL, blank=True, null=True)
-    previous_post = models.ForeignKey('self', related_name='previous', on_delete=models.SET_NULL, blank=True, null=True)
+    next_post = models.ForeignKey(
+        'self', related_name='next', on_delete=models.SET_NULL, blank=True, null=True)
+    previous_post = models.ForeignKey(
+        'self', related_name='previous', on_delete=models.SET_NULL, blank=True, null=True)
     tags = TaggableManager()
     search_vector = SearchVector()
+    views = models.PositiveIntegerField()
 
     def __str__(self):
         return str(self.title)
@@ -62,10 +66,6 @@ class Post(models.Model):
     @property
     def comment_count(self):
         return Comment.objects.filter(post=self).count()
-
-    @property
-    def view_count(self):
-        return PostView.objects.filter(post=self).count()
 
     def get_updated(self):
         return reverse('blog:update', args=[self.id])
@@ -122,3 +122,13 @@ class Folder(models.Model):
 class Subscribe(models.Model):
     email = models.EmailField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    is_subscribed = models.BooleanField(default=True)
+
+    def __str__(self) -> str:
+        return str(self.email)
+
+    def unsubscribe(self):
+        self.is_subscribed = False
+        return self.save()
+
+    

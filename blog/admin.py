@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, Reply, Category, PostView, PostPicture, Folder, Subscribe
+from .models import Post, Comment, Reply, Category, PostPicture, Folder, Subscribe
 # Register your models here.
 class CommentInline(admin.StackedInline):
     model = Comment
@@ -20,7 +20,6 @@ class CommentAdmin(admin.ModelAdmin):
     inlines = [ReplyAdmin]
 
 admin.site.register(Category)
-admin.site.register(PostView)
 admin.site.register(PostPicture)
 admin.site.register(Folder)
 admin.site.register(Subscribe)
