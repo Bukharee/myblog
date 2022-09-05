@@ -2,77 +2,8 @@
  {% load static %}  
  {% load crispy_forms_tags %} 
  {% block content %}
- <style>
-    #entire {
-        margin: auto;
-    }
-    #hint_id_username {
-        display: none;
-    }
-    #form-ground {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 20px;
-    }
-    #side-image {
-           width: 500px;
-    background-color: orange;
-    height: 91.5vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    }
-    #side-image img {
-        aspect-ratio: 1600 /1200;
-        width: 80%;
-        height: auto;
-        margin: 20px;
-    }
-    #form {
-        width: 40vw;
-        display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-    height: 80vh;
-    align-items: center;
-    }
-    
-    input {
-        padding: 8px;
-    border-radius: 24px;
-    border-color: teal;
-    border-style: solid;
-    outline-color: orange;
-    width: 100%;
-    margin: 10px;
-    }
-    label {
-            margin-left: 10px;
-            margin-top:10px;
-    }
-    .submit {
-        background-color: orange;
-        padding: 10px;
-        font-size: medium;
-        border-color: orange;
-        font-weight: bolder;
-        width: 65%;
-    }
-   strong {
-    color: red;
-    font-size: small;
-    margin-left: 14px;
-    margin-bottom: 4px;
-   }
-   #agree-box {
-    font-size: small;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-   }
- </style>
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+
  <br><br><br>
 <div id="entire">
     <div id="form-ground">
