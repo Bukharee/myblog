@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-<style>
+<link rel="stylesheet"href="{% static 'css/blogengine/code.css' %}">
+{%  load blog_tags %}
+  <style>
   .link-back {
     display: flex;
     justify-content: start;
@@ -66,7 +68,9 @@
         ></span
       >
     </a>
-    <div class="article-body">{{ object.body|safe }}</div>
+    <div class="article-body">{{ object.body|markdown }}</div>
   </article>
 </div>
+<script>
+</script>
 {% endblock %}
