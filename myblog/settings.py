@@ -21,12 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#1x53st&b#!!+#*ny+fk8q0-q(43d#b!v!j4wy35zs37zgwvn5'
-
+SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'gentle-everglades-85963.herokuapp.com']
+DEBUG = os.environ['DEBUG'] == "1"
+
+ALLOWED_HOSTS = ["*", ]
 
 
 # Application definition
@@ -92,13 +92,18 @@ CKEDITOR_ALLOW_NONIMAGE_FILES = False
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {'default': dj_database_url.parse(' postgres://sesglbwxcwxabs:1f996fe64734191aa5eef5c9a3d9b1ea89b99fa9acb98254d4c401e1d47478f5@ec2-52-87-22-151.compute-1.amazonaws.com:5432/da6n9jkasi3a8g')}
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if os.environ['LIVE'] == "1":
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
     }
-}
+    # DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 # DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
@@ -135,20 +140,40 @@ USE_L10N = True
 
 USE_TZ = True
 
+SECURE_SSL_REDIRECT = os.environ['SECURE_SSL_REDIRECT'] == "1"
+USE_S3 = os.environ['USE_S3'] == "1"
+if USE_S3:
+    # aws settings
+    AWS_ACCESS_KEY_ID = 'AKIAS4KB5U7XMR6JXBWO'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = "quicksupply"
+    AWS_DEFAULT_ACL = None
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    # s3 static settings
+    AWS_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    # s3 public media settings
+    PUBLIC_MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+else:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_URL = '/media/'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
