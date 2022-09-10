@@ -139,7 +139,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
+STATIC_ROOT = 'static_root/'
 SECURE_SSL_REDIRECT = os.environ['SECURE_SSL_REDIRECT'] == "1"
 USE_S3 = os.environ['USE_S3'] == "1"
 if USE_S3:
